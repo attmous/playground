@@ -19,28 +19,28 @@ code-host:
   kind: github
   github_slug: attmous/daedalus-playground
 runtimes:
-  coder-runtime:
-    kind: acpx-codex
-    session-idle-freshness-seconds: 900
-    session-idle-grace-seconds: 1800
-    session-nudge-cooldown-seconds: 600
-  reviewer-runtime:
-    kind: claude-cli
-    max-turns-per-invocation: 24
-    timeout-seconds: 1200
+  codex-service:
+    kind: codex-app-server
+    mode: external
+    endpoint: ws://127.0.0.1:4500
+    ephemeral: false
+    approval_policy: never
+    thread_sandbox: danger-full-access
+    turn_sandbox_policy: danger-full-access
+    keep_alive: true
 actors:
   implementer:
     name: Change_Implementer
-    model: gpt-5.3-codex-spark/high
-    runtime: coder-runtime
+    model: gpt-5.4-mini
+    runtime: codex-service
   implementer-high-effort:
     name: Change_Implementer_High_Effort
-    model: gpt-5.4
-    runtime: coder-runtime
+    model: gpt-5.4-mini
+    runtime: codex-service
   reviewer:
     name: Change_Reviewer
-    model: claude-sonnet-4-6
-    runtime: reviewer-runtime
+    model: gpt-5.4-mini
+    runtime: codex-service
 stages:
   implement:
     actor: implementer
