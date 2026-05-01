@@ -1,0 +1,107 @@
+---
+workflow: change-delivery
+schema-version: 1
+instance:
+  name: attmous-daedalus-playground-change-delivery
+  engine-owner: hermes
+repository:
+  local-path: /home/radxa/WS/daedalus-playground
+  slug: attmous/daedalus-playground
+  active-lane-label: active-lane
+tracker:
+  kind: github
+  github_slug: attmous/daedalus-playground
+  active_states:
+  - open
+  terminal_states:
+  - closed
+code-host:
+  kind: github
+  github_slug: attmous/daedalus-playground
+runtimes:
+  coder-runtime:
+    kind: acpx-codex
+    session-idle-freshness-seconds: 900
+    session-idle-grace-seconds: 1800
+    session-nudge-cooldown-seconds: 600
+  reviewer-runtime:
+    kind: claude-cli
+    max-turns-per-invocation: 24
+    timeout-seconds: 1200
+agents:
+  coder:
+    default:
+      name: Internal_Coder_Agent
+      model: gpt-5.3-codex-spark/high
+      runtime: coder-runtime
+    high-effort:
+      name: Escalation_Coder_Agent
+      model: gpt-5.4
+      runtime: coder-runtime
+  internal-reviewer:
+    name: Internal_Reviewer_Agent
+    model: claude-sonnet-4-6
+    runtime: reviewer-runtime
+    freeze-coder-while-running: true
+  external-reviewer:
+    enabled: false
+    name: External_Reviewer_Agent
+    kind: disabled
+gates:
+  internal-review:
+    pass-with-findings-tolerance: 1
+    require-pass-clean-before-publish: true
+    request-cooldown-seconds: 1200
+  external-review:
+    required-for-merge: true
+  merge:
+    require-ci-acceptable: true
+triggers:
+  lane-selector:
+    type: github-label
+    label: active-lane
+storage:
+  ledger: memory/workflow-status.json
+  health: memory/workflow-health.json
+  audit-log: memory/workflow-audit.jsonl
+  scheduler: memory/workflow-scheduler.json
+retention:
+  events:
+    max-age-days: 30
+    max-rows: 100000
+lane-selection:
+  exclude-labels:
+  - blocked
+  tiebreak: oldest
+tracker-feedback:
+  enabled: true
+  comment-mode: append
+  include:
+  - dispatch-implementation-turn
+  - internal-review-completed
+  - publish-ready-pr
+  - push-pr-update
+  - merge-and-promote
+  - operator-attention-transition
+  - operator-attention-recovered
+  state-updates:
+    enabled: false
+---
+
+# Workflow Policy
+
+Daedalus runs the `change-delivery` workflow for the repository configured above.
+
+Shared rules:
+
+- Keep scope narrow to the active issue and current lane state.
+- Prefer small, reviewable diffs over speculative refactors.
+- Run focused validation and report it honestly.
+- Stop and surface blockers instead of guessing.
+- Do not publish generated artifacts or unrelated files.
+
+Role intent:
+
+- `coder`: implement the next correct change and leave a clean handoff.
+- `internal-reviewer`: review correctness, regressions, and test honesty before publish.
+- `external-reviewer`: provide an optional second-pass review when enabled.
