@@ -16,13 +16,20 @@ pytest
 
 ## Daedalus Smoke Path
 
-From this repository checkout:
+This repository is bootstrapped with `WORKFLOW.md` for the Daedalus
+`change-delivery` workflow. Create or reuse a small GitHub issue with the
+`active-lane` and `daedalus-smoke` labels, then validate the contract:
 
 ```bash
-hermes daedalus bootstrap
 hermes daedalus validate
 ```
 
-Use GitHub issues as disposable workflow inputs. A good smoke issue is a small,
-testable change such as adding another greeting format or calculator helper.
+For a local parser/runtime check when the Hermes top-level plugin command is not
+available, invoke the plugin CLI directly:
 
+```bash
+python3 ~/.hermes/plugins/daedalus/daedalus_cli.py validate --format json
+```
+
+Good smoke issues are small, testable changes such as adding another greeting
+format or calculator helper.
