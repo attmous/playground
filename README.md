@@ -3,9 +3,30 @@
 Small target repository for smoke testing Daedalus workflow onboarding.
 
 The code is intentionally simple: a tiny Python package under `src/` plus one
-pytest file. Daedalus workflow smoke tests can safely create issues, bootstrap a
+pytest suite. Daedalus workflow smoke tests can safely create issues, bootstrap a
 `WORKFLOW.md`, dispatch an agent, open a pull request, and run CI against this
 repository without touching production code.
+
+## Usage
+
+```python
+from daedalus_playground import greeting, render_greeting_template, salutation
+
+greeting()
+# 'Hello, Daedalus!'
+greeting("Hermes")
+# 'Hello, Hermes!'
+
+salutation()
+# 'Salutations, Daedalus.'
+salutation("Hermes")
+# 'Salutations, Hermes.'
+
+render_greeting_template("farewell")
+# 'Goodbye, Daedalus.'
+render_greeting_template("farewell", "Hermes")
+# 'Goodbye, Hermes.'
+```
 
 ## Local Checks
 
