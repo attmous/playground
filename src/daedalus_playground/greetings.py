@@ -1,15 +1,33 @@
+_GREETING_TEMPLATES = {
+    "friendly": "Hello, {name}!",
+    "formal": "Salutations, {name}.",
+    "farewell": "Goodbye, {name}.",
+}
+
+
 def _normalize_name(name: str) -> str:
     clean_name = name.strip()
     return clean_name or "Daedalus"
 
 
+def render_greeting_template(template_name: str, name: str = "Daedalus") -> str:
+    """Render a built-in greeting template with a normalized name."""
+    template = _GREETING_TEMPLATES.get(template_name)
+    if template is None:
+        available = ", ".join(sorted(_GREETING_TEMPLATES))
+        raise ValueError(
+            f"Unknown greeting template: {template_name}. "
+            f"Available templates: {available}."
+        )
+
+    return template.format(name=_normalize_name(name))
+
+
 def greeting(name: str = "Daedalus") -> str:
     """Return a predictable greeting for smoke tests."""
-    clean_name = _normalize_name(name)
-    return f"Hello, {clean_name}!"
+    return render_greeting_template("friendly", name)
 
 
 def salutation(name: str = "Daedalus") -> str:
     """Return the requested salutation helper."""
-    clean_name = _normalize_name(name)
-    return f"Salutations, {clean_name}."
+    return render_greeting_template("formal", name)

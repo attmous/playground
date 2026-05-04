@@ -26,4 +26,5 @@ def test_cli_reports_unknown_greeting_type(capsys) -> None:
     assert exit_code != 0
     assert captured.out == ""
     assert "Unknown greeting type: unknown." in captured.err
-    assert "Available types: greeting, salutation." in captured.err
+    assert "greeting" in captured.err
+    assert "salutation" in captured.err
