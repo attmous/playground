@@ -119,6 +119,12 @@ Include:
 - final lane status: complete, running, retry, or operator_attention
 - any anomalies observed, especially stale status fields, daemon lease behavior,
   or completed runs with misleading `error` fields
+- lesson file written by the `lessons` skill under `docs/lessons_learned/`
+
+Before sending the final smoke report, run the repo-local `lessons` skill and
+document the run's issue, resolution, lessons learned, and follow-up items. If
+the smoke had no anomalies, still add a short note saying that no new lesson was
+found and point to the final status checks.
 
 ## When Starting Over
 
