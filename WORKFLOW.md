@@ -4,7 +4,7 @@ schema-version: 1
 template: change-delivery
 tracker:
   kind: github
-  github_slug: attmous/daedalus-playground
+  github_slug: attmous/playground
   active_states:
   - open
   terminal_states:
@@ -26,7 +26,7 @@ intake:
     max-per-tick: 3
 code-host:
   kind: github
-  github_slug: attmous/daedalus-playground
+  github_slug: attmous/playground
 concurrency:
   max-lanes: 3
   actors:
