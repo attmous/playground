@@ -20,6 +20,7 @@ def test_make_slug_trims_to_max_length_without_trailing_hyphen() -> None:
 
 
 def test_make_slug_returns_item_for_empty_result() -> None:
+    assert make_slug("") == "item"
     assert make_slug(" !!! ") == "item"
 
 
