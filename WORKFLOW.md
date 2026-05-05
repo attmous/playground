@@ -101,11 +101,11 @@ storage:
   state: .sprints/change-delivery-state.json
   audit-log: .sprints/change-delivery-audit.jsonl
 instance:
-  name: attmous-daedalus-playground-change-delivery
+  name: attmous-playground-change-delivery
   engine-owner: hermes
 repository:
-  local-path: /home/radxa/WS/daedalus-playground
-  slug: attmous/daedalus-playground
+  local-path: /home/radxa/WS/playground
+  slug: attmous/playground
 ---
 
 # Orchestrator Policy

@@ -1,8 +1,8 @@
-from daedalus_playground.glimmer import glimmer_token
+from playground.glimmer import glimmer_token
 
 
 def test_glimmer_token_uses_default_name() -> None:
-    assert glimmer_token() == "Glimmer: Daedalus"
+    assert glimmer_token() == "Glimmer: Sprints"
 
 
 def test_glimmer_token_trims_custom_name() -> None:
@@ -10,4 +10,4 @@ def test_glimmer_token_trims_custom_name() -> None:
 
 
 def test_glimmer_token_uses_default_for_blank_name() -> None:
-    assert glimmer_token("   ") == "Glimmer: Daedalus"
+    assert glimmer_token("   ") == "Glimmer: Sprints"

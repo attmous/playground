@@ -1,8 +1,8 @@
-from daedalus_playground.harbor import harbor_token
+from playground.harbor import harbor_token
 
 
 def test_harbor_token_uses_default_name() -> None:
-    assert harbor_token() == "Harbor: Daedalus"
+    assert harbor_token() == "Harbor: Sprints"
 
 
 def test_harbor_token_trims_custom_name() -> None:
@@ -10,4 +10,4 @@ def test_harbor_token_trims_custom_name() -> None:
 
 
 def test_harbor_token_uses_default_for_blank_name() -> None:
-    assert harbor_token("   ") == "Harbor: Daedalus"
+    assert harbor_token("   ") == "Harbor: Sprints"

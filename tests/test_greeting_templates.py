@@ -1,6 +1,6 @@
 import pytest
 
-from daedalus_playground import greeting, render_greeting_template, salutation
+from playground import greeting, render_greeting_template, salutation
 
 
 def test_render_greeting_template_supports_built_in_templates() -> None:
@@ -10,7 +10,7 @@ def test_render_greeting_template_supports_built_in_templates() -> None:
 
 
 def test_render_greeting_template_uses_default_for_blank_name() -> None:
-    assert render_greeting_template("farewell", "   ") == "Goodbye, Daedalus."
+    assert render_greeting_template("farewell", "   ") == "Goodbye, Sprints."
 
 
 def test_render_greeting_template_rejects_unknown_templates() -> None:
@@ -20,6 +20,6 @@ def test_render_greeting_template_rejects_unknown_templates() -> None:
 
 def test_existing_helpers_keep_their_outputs() -> None:
     assert greeting("  Hermes  ") == "Hello, Hermes!"
-    assert greeting("   ") == "Hello, Daedalus!"
+    assert greeting("   ") == "Hello, Sprints!"
     assert salutation("  Hermes  ") == "Salutations, Hermes."
-    assert salutation("   ") == "Salutations, Daedalus."
+    assert salutation("   ") == "Salutations, Sprints."

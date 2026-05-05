@@ -1,12 +1,12 @@
 ---
 name: smoke
-description: Run a fresh Sprints smoke test for daedalus-playground by syncing main, reinstalling the Sprints plugin, selecting the workflow root, applying the active workflow contract, starting managed daemons, creating or selecting a smoke issue, and observing until completion or operator attention.
+description: Run a fresh Sprints smoke test for playground by syncing main, reinstalling the Sprints plugin, selecting the workflow root, applying the active workflow contract, starting managed daemons, creating or selecting a smoke issue, and observing until completion or operator attention.
 ---
 
 # Smoke
 
 Use this skill when the user asks to start or observe a Sprints smoke test for
-`attmous/daedalus-playground`.
+`attmous/playground`.
 
 Prefer the managed daemon path. Use foreground one-shot ticks only when the
 managed systemd user services are unavailable or the user explicitly asks for
@@ -14,7 +14,7 @@ manual observation.
 
 ## Inputs To Resolve
 
-- Playground checkout: `/home/radxa/WS/daedalus-playground`
+- Playground checkout: `/home/radxa/WS/playground`
 - Sprints checkout: `/home/radxa/WS/sprints`
 - Workflow name: default `change-delivery`
 - Workflow root: prefer `.hermes/sprints/workflow-root`
@@ -29,9 +29,9 @@ only after confirming the intended repo slug and workflow name.
 ```bash
 git -C /home/radxa/WS/sprints status --short --branch
 git -C /home/radxa/WS/sprints pull --ff-only origin main
-git -C /home/radxa/WS/daedalus-playground status --short --branch
-git -C /home/radxa/WS/daedalus-playground switch main
-git -C /home/radxa/WS/daedalus-playground pull --ff-only origin main
+git -C /home/radxa/WS/playground status --short --branch
+git -C /home/radxa/WS/playground switch main
+git -C /home/radxa/WS/playground pull --ff-only origin main
 ```
 
 If either checkout has local modifications, stop and report the dirty paths
@@ -46,7 +46,7 @@ python3 /home/radxa/WS/sprints/scripts/install.py
 3. Pick and validate the workflow.
 
 ```bash
-WORKFLOW_ROOT="$(cat /home/radxa/WS/daedalus-playground/.hermes/sprints/workflow-root)"
+WORKFLOW_ROOT="$(cat /home/radxa/WS/playground/.hermes/sprints/workflow-root)"
 python3 /home/radxa/WS/sprints/sprints_cli.py validate --workflow-root "$WORKFLOW_ROOT" --format text
 python3 /home/radxa/WS/sprints/sprints_cli.py apply-contract --workflow-root "$WORKFLOW_ROOT" --source-ref origin/main --format text
 python3 /home/radxa/WS/sprints/sprints_cli.py status --workflow-root "$WORKFLOW_ROOT" --format json
@@ -83,7 +83,7 @@ For a new issue, create a small scoped change and add `active` plus
 `sprints-smoke`.
 
 ```bash
-gh issue create --repo attmous/daedalus-playground --title "<smoke title>" --label active --label sprints-smoke --body '<issue body>'
+gh issue create --repo attmous/playground --title "<smoke title>" --label active --label sprints-smoke --body '<issue body>'
 ```
 
 Avoid Markdown backticks in double-quoted shell strings. Prefer single quotes or
@@ -96,14 +96,14 @@ Poll the workflow and tracker state:
 ```bash
 python3 /home/radxa/WS/sprints/sprints_cli.py status --workflow-root "$WORKFLOW_ROOT" --format json
 python3 /home/radxa/WS/sprints/sprints_cli.py events --workflow-root "$WORKFLOW_ROOT" --limit 20 --format text
-gh issue list --repo attmous/daedalus-playground --state open --label active --limit 20 --json number,title,url,labels
-gh pr list --repo attmous/daedalus-playground --state open --limit 20 --json number,title,url,headRefName,statusCheckRollup
+gh issue list --repo attmous/playground --state open --label active --limit 20 --json number,title,url,labels
+gh pr list --repo attmous/playground --state open --limit 20 --json number,title,url,headRefName,statusCheckRollup
 ```
 
 When a PR appears, inspect it:
 
 ```bash
-gh pr view <number> --repo attmous/daedalus-playground --json number,title,state,url,headRefName,headRefOid,mergeable,isDraft,statusCheckRollup
+gh pr view <number> --repo attmous/playground --json number,title,state,url,headRefName,headRefOid,mergeable,isDraft,statusCheckRollup
 ```
 
 7. Report outcome.

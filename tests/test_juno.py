@@ -1,8 +1,8 @@
-from daedalus_playground.juno import juno_token
+from playground.juno import juno_token
 
 
 def test_juno_token_uses_default_name() -> None:
-    assert juno_token() == "Juno: Daedalus"
+    assert juno_token() == "Juno: Sprints"
 
 
 def test_juno_token_trims_custom_name() -> None:
@@ -10,4 +10,4 @@ def test_juno_token_trims_custom_name() -> None:
 
 
 def test_juno_token_uses_default_for_blank_name() -> None:
-    assert juno_token("   ") == "Juno: Daedalus"
+    assert juno_token("   ") == "Juno: Sprints"

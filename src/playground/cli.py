@@ -3,7 +3,7 @@ import inspect
 import sys
 from collections.abc import Callable, Sequence
 
-import daedalus_playground
+import playground
 
 
 def _is_simple_greeting_helper(helper: Callable[..., str]) -> bool:
@@ -19,8 +19,8 @@ def _is_simple_greeting_helper(helper: Callable[..., str]) -> bool:
 
 def _greeting_helpers() -> dict[str, Callable[[str], str]]:
     helpers = {}
-    for name in daedalus_playground.__all__:
-        helper = getattr(daedalus_playground, name)
+    for name in playground.__all__:
+        helper = getattr(playground, name)
         if callable(helper) and _is_simple_greeting_helper(helper):
             helpers[name] = helper
     return helpers
@@ -29,11 +29,11 @@ def _greeting_helpers() -> dict[str, Callable[[str], str]]:
 def main(argv: Sequence[str] | None = None) -> int:
     helpers = _greeting_helpers()
     parser = argparse.ArgumentParser(
-        prog="daedalus-greet",
-        description="Print a Daedalus greeting.",
+        prog="sprints-greet",
+        description="Print a Sprints greeting.",
     )
     parser.add_argument("kind", help="Greeting type to print.")
-    parser.add_argument("name", nargs="?", default="Daedalus")
+    parser.add_argument("name", nargs="?", default="Sprints")
     args = parser.parse_args(argv)
 
     helper = helpers.get(args.kind)

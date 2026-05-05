@@ -3,18 +3,19 @@ requires = ["setuptools>=66", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "daedalus-playground"
+name = "playground"
 version = "0.1.0"
-description = "Small smoke-test target repository for Daedalus workflows."
+description = "Small smoke-test target repository for Sprints workflows."
 requires-python = ">=3.10"
 readme = "README.md"
 dependencies = ["pytest"]
 
 [project.scripts]
-daedalus-greet = "daedalus_playground.cli:main"
+sprints-greet = "playground.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.pytest.ini_options]
+pythonpath = ["src"]
 testpaths = ["tests"]

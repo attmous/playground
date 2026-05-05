@@ -1,29 +1,29 @@
-# Playground
+# Sprints Playground
 
-Small target repository for smoke testing Spirnts workflow onboarding.
+Small target repository for smoke testing Sprints workflow onboarding.
 
 The code is intentionally simple: a tiny Python package under `src/` plus one
-pytest suite. Daedalus workflow smoke tests can safely create issues, bootstrap a
+pytest suite. Sprints workflow smoke tests can safely create issues, bootstrap a
 `WORKFLOW.md`, dispatch an agent, open a pull request, and run CI against this
 repository without touching production code.
 
 ## Usage
 
 ```python
-from daedalus_playground import greeting, render_greeting_template, salutation
+from playground import greeting, render_greeting_template, salutation
 
 greeting()
-# 'Hello, Daedalus!'
+# 'Hello, Sprints!'
 greeting("Hermes")
 # 'Hello, Hermes!'
 
 salutation()
-# 'Salutations, Daedalus.'
+# 'Salutations, Sprints.'
 salutation("Hermes")
 # 'Salutations, Hermes.'
 
 render_greeting_template("farewell")
-# 'Goodbye, Daedalus.'
+# 'Goodbye, Sprints.'
 render_greeting_template("farewell", "Hermes")
 # 'Goodbye, Hermes.'
 ```
@@ -35,21 +35,21 @@ python3 -m pip install -e .[test]
 pytest
 ```
 
-## Daedalus Smoke Path
+## Sprints Smoke Path
 
-This repository is bootstrapped with `WORKFLOW.md` for the Daedalus
+This repository is bootstrapped with `WORKFLOW.md` for the Sprints
 `change-delivery` workflow. Create or reuse a small GitHub issue with the
-`active-lane` and `daedalus-smoke` labels, then validate the contract:
+`active-lane` and `sprints-smoke` labels, then validate the contract:
 
 ```bash
-hermes daedalus validate
+hermes sprints validate
 ```
 
 For a local parser/runtime check when the Hermes top-level plugin command is not
 available, invoke the plugin CLI directly:
 
 ```bash
-python3 ~/.hermes/plugins/daedalus/daedalus_cli.py validate --format json
+python3 ~/.hermes/plugins/sprints/sprints_cli.py validate --format json
 ```
 
 Good smoke issues are small, testable changes such as adding another greeting

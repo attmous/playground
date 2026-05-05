@@ -1,8 +1,8 @@
-from daedalus_playground import salutation
+from playground import salutation
 
 
 def test_salutation_uses_default_name() -> None:
-    assert salutation() == "Salutations, Daedalus."
+    assert salutation() == "Salutations, Sprints."
 
 
 def test_salutation_uses_custom_name() -> None:
@@ -14,4 +14,4 @@ def test_salutation_trims_custom_name() -> None:
 
 
 def test_salutation_uses_default_for_blank_name() -> None:
-    assert salutation("   ") == "Salutations, Daedalus."
+    assert salutation("   ") == "Salutations, Sprints."

@@ -1,4 +1,4 @@
-from daedalus_playground.cli import main
+from playground.cli import main
 
 
 def test_cli_prints_selected_greeting(capsys) -> None:
@@ -15,7 +15,7 @@ def test_cli_prints_selected_salutation_with_default_name(capsys) -> None:
 
     captured = capsys.readouterr()
     assert exit_code == 0
-    assert captured.out == "Salutations, Daedalus.\n"
+    assert captured.out == "Salutations, Sprints.\n"
     assert captured.err == ""
 
 
