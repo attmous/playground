@@ -35,7 +35,7 @@ workspace:
 
       '
 concurrency:
-  max-lanes: 1
+  max-lanes: 3
   per-lane-lock: true
 limits:
   max_turns: 20
